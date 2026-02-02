@@ -1,7 +1,7 @@
 {
   "name": "NamastuBharat",
   "short_name": "NamastuBharat",
-  "description": "India's leading carbon credit platform for farmers",
+  "description": "India's leading carbon credit platform for farmers - कार्बन क्रेडिट",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FAF8F5",
@@ -9,9 +9,10 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "64x64",
-      "type": "image/x-icon"
+      "src": "/app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
