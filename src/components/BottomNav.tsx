@@ -1,4 +1,4 @@
-import { Home, MapPin, Camera, Wallet } from "lucide-react";
+import { Home, MapPin, Camera, Wallet, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface BottomNavProps {
@@ -25,6 +25,11 @@ const BottomNav = ({ activeTab, onTabChange, language }: BottomNavProps) => {
       label: { hi: "फोटो", en: "Photos" } 
     },
     { 
+      id: "gyaan", 
+      icon: Lightbulb, 
+      label: { hi: "ज्ञान", en: "Gyaan" } 
+    },
+    { 
       id: "wallet", 
       icon: Wallet, 
       label: { hi: "वॉलेट", en: "Wallet" } 
@@ -33,7 +38,7 @@ const BottomNav = ({ activeTab, onTabChange, language }: BottomNavProps) => {
 
   return (
     <nav className="nav-bottom z-50">
-      <div className="flex items-center justify-around px-4 py-2">
+      <div className="flex items-center justify-around px-2 py-2">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           const Icon = tab.icon;
@@ -50,7 +55,7 @@ const BottomNav = ({ activeTab, onTabChange, language }: BottomNavProps) => {
                 animate={isActive ? { y: -2 } : { y: 0 }}
               >
                 <Icon 
-                  className={`nav-icon w-6 h-6 transition-colors duration-300 ${
+                  className={`nav-icon w-5 h-5 transition-colors duration-300 ${
                     isActive ? "text-forest" : "text-muted-foreground"
                   }`}
                   strokeWidth={isActive ? 2.5 : 2}
@@ -65,7 +70,7 @@ const BottomNav = ({ activeTab, onTabChange, language }: BottomNavProps) => {
                 )}
               </motion.div>
               <span 
-                className={`text-xs mt-1 font-medium transition-colors duration-300 ${
+                className={`text-[10px] mt-1 font-medium transition-colors duration-300 ${
                   isActive ? "text-forest" : "text-muted-foreground"
                 }`}
               >
