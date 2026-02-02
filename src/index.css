@@ -2,87 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* NamastuBharat Design System - Earth Tones for Rural India */
+/* High contrast, sunlight-readable, organic aesthetic */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Earth Palette */
+    --forest: 122 39% 33%;
+    --forest-light: 122 35% 45%;
+    --forest-dark: 122 42% 22%;
+    --forest-glow: 122 50% 55%;
+    
+    --soil: 16 32% 29%;
+    --soil-light: 16 28% 42%;
+    --soil-dark: 16 35% 18%;
+    
+    --amber: 38 92% 50%;
+    --amber-light: 40 95% 60%;
+    --amber-dark: 35 88% 40%;
+    --amber-glow: 45 100% 70%;
+    
+    --leaf: 85 45% 50%;
+    --leaf-light: 90 50% 65%;
+    
+    --cream: 40 30% 96%;
+    --cream-dark: 35 20% 90%;
+    
+    --sky: 200 80% 60%;
+    --sky-light: 195 85% 75%;
+    
+    /* Semantic Tokens */
+    --background: 40 25% 97%;
+    --foreground: 16 35% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 16 35% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 16 35% 18%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 122 39% 33%;
+    --primary-foreground: 40 30% 96%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 16 32% 29%;
+    --secondary-foreground: 40 30% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 35 20% 90%;
+    --muted-foreground: 16 20% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 16 35% 18%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 35 25% 85%;
+    --input: 35 25% 85%;
+    --ring: 122 39% 33%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Custom Gradients */
+    --gradient-forest: linear-gradient(135deg, hsl(122 39% 33%), hsl(122 42% 22%));
+    --gradient-amber: linear-gradient(135deg, hsl(38 92% 50%), hsl(35 88% 40%));
+    --gradient-soil: linear-gradient(135deg, hsl(16 32% 29%), hsl(16 35% 18%));
+    --gradient-sky: linear-gradient(180deg, hsl(200 80% 60%), hsl(195 85% 75%));
+    --gradient-earth: linear-gradient(180deg, hsl(40 25% 97%) 0%, hsl(35 20% 90%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(35 20% 96%));
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px hsl(16 32% 29% / 0.1);
+    --shadow-md: 0 4px 16px -4px hsl(16 32% 29% / 0.15);
+    --shadow-lg: 0 8px 32px -8px hsl(16 32% 29% / 0.2);
+    --shadow-glow-amber: 0 0 20px hsl(38 92% 50% / 0.4);
+    --shadow-glow-forest: 0 0 20px hsl(122 39% 33% / 0.3);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 16 35% 8%;
+    --foreground: 40 30% 96%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 16 30% 12%;
+    --card-foreground: 40 30% 96%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 16 30% 12%;
+    --popover-foreground: 40 30% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 122 45% 45%;
+    --primary-foreground: 16 35% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 16 28% 25%;
+    --secondary-foreground: 40 30% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 16 25% 18%;
+    --muted-foreground: 35 15% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 38 92% 55%;
+    --accent-foreground: 16 35% 8%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 16 20% 20%;
+    --input: 16 20% 20%;
+    --ring: 122 45% 45%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +135,224 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Hide scrollbar for mobile app feel */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer components {
+  /* High-contrast buttons for sunlight readability */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground font-semibold rounded-2xl px-6 py-4 shadow-md;
+    background: var(--gradient-forest);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .btn-amber {
+    @apply font-semibold rounded-2xl px-6 py-4;
+    background: var(--gradient-amber);
+    color: hsl(var(--soil-dark));
+    box-shadow: var(--shadow-glow-amber);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-amber:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Card styles with organic feel */
+  .card-earth {
+    @apply rounded-3xl p-5;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .card-forest {
+    @apply rounded-3xl p-5 text-primary-foreground;
+    background: var(--gradient-forest);
+    box-shadow: var(--shadow-glow-forest);
+  }
+  
+  /* Navigation bar for mobile */
+  .nav-bottom {
+    @apply fixed bottom-0 left-0 right-0 bg-card border-t border-border;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -4px 20px hsl(16 32% 29% / 0.1);
+  }
+  
+  .nav-item {
+    @apply flex flex-col items-center justify-center py-2 px-3 rounded-xl transition-all duration-300;
+  }
+  
+  .nav-item.active {
+    @apply bg-primary/10;
+  }
+  
+  .nav-item.active .nav-icon {
+    @apply text-primary;
+  }
+  
+  /* Satellite widget */
+  .satellite-widget {
+    @apply relative overflow-hidden rounded-2xl;
+    background: var(--gradient-sky);
+  }
+  
+  /* Animated tree glow effect */
+  .tree-glow {
+    animation: treeGlow 3s ease-in-out infinite;
+  }
+  
+  @keyframes treeGlow {
+    0%, 100% {
+      filter: drop-shadow(0 0 10px hsl(122 50% 55% / 0.4));
+    }
+    50% {
+      filter: drop-shadow(0 0 25px hsl(122 50% 55% / 0.7));
+    }
+  }
+  
+  /* Coin shimmer animation */
+  .coin-shimmer {
+    animation: coinShimmer 2s ease-in-out infinite;
+  }
+  
+  @keyframes coinShimmer {
+    0%, 100% {
+      filter: drop-shadow(0 0 5px hsl(38 92% 50% / 0.5));
+    }
+    50% {
+      filter: drop-shadow(0 0 15px hsl(45 100% 70% / 0.8));
+    }
+  }
+  
+  /* Pulse animation for notifications */
+  .pulse-gentle {
+    animation: pulseGentle 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulseGentle {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+  }
+  
+  /* Floating animation for elements */
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  
+  /* Health bar gradient */
+  .health-bar {
+    background: linear-gradient(90deg, 
+      hsl(0 72% 51%) 0%, 
+      hsl(38 92% 50%) 50%, 
+      hsl(122 39% 33%) 100%
+    );
+  }
+  
+  /* Voice button style */
+  .voice-btn {
+    @apply rounded-full p-3 bg-primary/10 text-primary;
+    transition: all 0.3s ease;
+  }
+  
+  .voice-btn:hover {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  /* Status badges */
+  .badge-verified {
+    @apply px-3 py-1 rounded-full text-xs font-semibold;
+    background: hsl(var(--forest-light) / 0.2);
+    color: hsl(var(--forest));
+  }
+  
+  .badge-pending {
+    @apply px-3 py-1 rounded-full text-xs font-semibold;
+    background: hsl(var(--amber) / 0.2);
+    color: hsl(var(--amber-dark));
+  }
+  
+  /* Mobile app container */
+  .app-container {
+    @apply min-h-screen pb-24;
+    background: var(--gradient-earth);
+  }
+  
+  /* Safe area padding for mobile */
+  .safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-bottom {
+    padding-bottom: max(5rem, calc(4rem + env(safe-area-inset-bottom)));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-forest {
+    color: hsl(var(--forest));
+  }
+  
+  .text-soil {
+    color: hsl(var(--soil));
+  }
+  
+  .text-amber {
+    color: hsl(var(--amber));
+  }
+  
+  .bg-forest {
+    background-color: hsl(var(--forest));
+  }
+  
+  .bg-soil {
+    background-color: hsl(var(--soil));
+  }
+  
+  .bg-amber {
+    background-color: hsl(var(--amber));
+  }
+  
+  .bg-cream {
+    background-color: hsl(var(--cream));
+  }
+  
+  .bg-leaf {
+    background-color: hsl(var(--leaf));
   }
 }
