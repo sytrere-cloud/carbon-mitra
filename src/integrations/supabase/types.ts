@@ -14,16 +14,270 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      carbon_credits: {
+        Row: {
+          buyer_name: string | null
+          created_at: string
+          credits_amount: number
+          farm_id: string
+          id: string
+          payout_amount: number | null
+          payout_status: string | null
+          price_per_credit: number | null
+          sale_date: string | null
+          season: string | null
+          status: string | null
+          updated_at: string
+          user_id: string
+          verification_date: string | null
+          year: number | null
+        }
+        Insert: {
+          buyer_name?: string | null
+          created_at?: string
+          credits_amount: number
+          farm_id: string
+          id?: string
+          payout_amount?: number | null
+          payout_status?: string | null
+          price_per_credit?: number | null
+          sale_date?: string | null
+          season?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id: string
+          verification_date?: string | null
+          year?: number | null
+        }
+        Update: {
+          buyer_name?: string | null
+          created_at?: string
+          credits_amount?: number
+          farm_id?: string
+          id?: string
+          payout_amount?: number | null
+          payout_status?: string | null
+          price_per_credit?: number | null
+          sale_date?: string | null
+          season?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+          verification_date?: string | null
+          year?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "carbon_credits_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "farms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      farm_photos: {
+        Row: {
+          captured_at: string
+          created_at: string
+          farm_id: string
+          id: string
+          latitude: number | null
+          longitude: number | null
+          photo_type: string
+          photo_url: string
+          rejection_reason: string | null
+          user_id: string
+          verification_status: string | null
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          captured_at: string
+          created_at?: string
+          farm_id: string
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          photo_type: string
+          photo_url: string
+          rejection_reason?: string | null
+          user_id: string
+          verification_status?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          captured_at?: string
+          created_at?: string
+          farm_id?: string
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          photo_type?: string
+          photo_url?: string
+          rejection_reason?: string | null
+          user_id?: string
+          verification_status?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "farm_photos_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "farms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      farms: {
+        Row: {
+          area_hectares: number | null
+          boundary: Json | null
+          created_at: string
+          crop_type: string | null
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          area_hectares?: number | null
+          boundary?: Json | null
+          created_at?: string
+          crop_type?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          area_hectares?: number | null
+          boundary?: Json | null
+          created_at?: string
+          crop_type?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ndvi_readings: {
+        Row: {
+          created_at: string
+          farm_id: string
+          grid_data: Json | null
+          health_score: number | null
+          id: string
+          ndvi_value: number | null
+          reading_date: string
+        }
+        Insert: {
+          created_at?: string
+          farm_id: string
+          grid_data?: Json | null
+          health_score?: number | null
+          id?: string
+          ndvi_value?: number | null
+          reading_date: string
+        }
+        Update: {
+          created_at?: string
+          farm_id?: string
+          grid_data?: Json | null
+          health_score?: number | null
+          id?: string
+          ndvi_value?: number | null
+          reading_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ndvi_readings_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "farms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          district: string | null
+          full_name: string | null
+          id: string
+          language: string | null
+          phone: string | null
+          state: string | null
+          updated_at: string
+          user_id: string
+          village: string | null
+        }
+        Insert: {
+          created_at?: string
+          district?: string | null
+          full_name?: string | null
+          id?: string
+          language?: string | null
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id: string
+          village?: string | null
+        }
+        Update: {
+          created_at?: string
+          district?: string | null
+          full_name?: string | null
+          id?: string
+          language?: string | null
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id?: string
+          village?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "farmer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +404,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "farmer"],
+    },
   },
 } as const
