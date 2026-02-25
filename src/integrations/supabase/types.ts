@@ -79,11 +79,15 @@ export type Database = {
       farm_photos: {
         Row: {
           captured_at: string
+          compass_heading: number | null
           created_at: string
+          device_info: Json | null
           farm_id: string
           id: string
           latitude: number | null
           longitude: number | null
+          milestone_stage: string | null
+          network_id: string | null
           photo_type: string
           photo_url: string
           rejection_reason: string | null
@@ -94,11 +98,15 @@ export type Database = {
         }
         Insert: {
           captured_at: string
+          compass_heading?: number | null
           created_at?: string
+          device_info?: Json | null
           farm_id: string
           id?: string
           latitude?: number | null
           longitude?: number | null
+          milestone_stage?: string | null
+          network_id?: string | null
           photo_type: string
           photo_url: string
           rejection_reason?: string | null
@@ -109,11 +117,15 @@ export type Database = {
         }
         Update: {
           captured_at?: string
+          compass_heading?: number | null
           created_at?: string
+          device_info?: Json | null
           farm_id?: string
           id?: string
           latitude?: number | null
           longitude?: number | null
+          milestone_stage?: string | null
+          network_id?: string | null
           photo_type?: string
           photo_url?: string
           rejection_reason?: string | null
@@ -209,8 +221,10 @@ export type Database = {
           district: string | null
           full_name: string | null
           id: string
+          kisan_id: string | null
           language: string | null
           phone: string | null
+          referral_code: string | null
           state: string | null
           updated_at: string
           user_id: string
@@ -221,8 +235,10 @@ export type Database = {
           district?: string | null
           full_name?: string | null
           id?: string
+          kisan_id?: string | null
           language?: string | null
           phone?: string | null
+          referral_code?: string | null
           state?: string | null
           updated_at?: string
           user_id: string
@@ -233,8 +249,10 @@ export type Database = {
           district?: string | null
           full_name?: string | null
           id?: string
+          kisan_id?: string | null
           language?: string | null
           phone?: string | null
+          referral_code?: string | null
           state?: string | null
           updated_at?: string
           user_id?: string

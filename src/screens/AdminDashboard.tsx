@@ -7,10 +7,7 @@ import {
   Users, 
   Map,
   LogOut,
-  CheckCircle2,
-  XCircle,
-  Clock,
-  TrendingUp,
+  AlertTriangle,
   Eye
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -19,12 +16,13 @@ import CarbonCreditsManager from "@/components/admin/CarbonCreditsManager";
 import FarmersList from "@/components/admin/FarmersList";
 import AdminOverview from "@/components/admin/AdminOverview";
 import AdminMapView from "@/components/admin/AdminMapView";
+import FraudDetectionPanel from "@/components/FraudDetectionPanel";
 
 interface AdminDashboardProps {
   onLogout: () => void;
 }
 
-type AdminTab = "overview" | "photos" | "credits" | "farmers" | "map";
+type AdminTab = "overview" | "photos" | "credits" | "farmers" | "map" | "fraud";
 
 const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   const [activeTab, setActiveTab] = useState<AdminTab>("overview");
@@ -41,6 +39,7 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
     { id: "credits" as AdminTab, label: "Carbon Credits", icon: Coins },
     { id: "farmers" as AdminTab, label: "Farmers", icon: Users },
     { id: "map" as AdminTab, label: "Farm Map", icon: Map },
+    { id: "fraud" as AdminTab, label: "Fraud Detection", icon: AlertTriangle },
   ];
 
   const renderContent = () => {
@@ -55,6 +54,8 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
         return <FarmersList />;
       case "map":
         return <AdminMapView />;
+      case "fraud":
+        return <FraudDetectionPanel />;
       default:
         return <AdminOverview />;
     }

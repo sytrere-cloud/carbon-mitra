@@ -1,28 +1,33 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Volume2 } from "lucide-react";
+import { MapPin, Volume2, Camera } from "lucide-react";
 import FarmMap from "@/components/FarmMap";
 import NDVIVisualization from "@/components/NDVIVisualization";
+import EvidenceMilestones from "@/components/EvidenceMilestones";
 import { toast } from "@/hooks/use-toast";
 
 interface KhetScreenProps {
   language: "hi" | "en";
 }
 
+type KhetTab = "map" | "satellite" | "evidence";
+
 const KhetScreen = ({ language }: KhetScreenProps) => {
-  const [showMap, setShowMap] = useState(false);
+  const [activeTab, setActiveTab] = useState<KhetTab>("evidence");
   
   const labels = {
     hi: {
       title: "खेत निगरानी",
-      mapFarm: "खेत मैप करें",
-      viewSatellite: "उपग्रह दृश्य देखें",
+      mapFarm: "मैप करें",
+      viewSatellite: "उपग्रह",
+      evidence: "साक्ष्य",
       listen: "रिपोर्ट सुनें",
     },
     en: {
       title: "Farm Monitoring",
-      mapFarm: "Map Your Farm",
-      viewSatellite: "View Satellite Data",
+      mapFarm: "Map Farm",
+      viewSatellite: "Satellite",
+      evidence: "Evidence",
       listen: "Listen to Report",
     }
   };
@@ -30,7 +35,6 @@ const KhetScreen = ({ language }: KhetScreenProps) => {
   const t = labels[language];
 
   const handleBoundarySave = (boundary: GeoJSON.Polygon, areaHectares: number) => {
-    // In real app, save to Supabase
     console.log("Boundary saved:", boundary, "Area:", areaHectares);
     toast({
       title: language === "hi" ? "सीमा सहेजी गई!" : "Boundary Saved!",
@@ -38,8 +42,13 @@ const KhetScreen = ({ language }: KhetScreenProps) => {
         ? `${areaHectares} हेक्टेयर क्षेत्रफल दर्ज किया गया` 
         : `${areaHectares} hectares recorded`,
     });
-    setShowMap(false);
   };
+
+  const tabs: { id: KhetTab; label: string; icon: React.ElementType }[] = [
+    { id: "evidence", label: t.evidence, icon: Camera },
+    { id: "map", label: t.mapFarm, icon: MapPin },
+    { id: "satellite", label: t.viewSatellite, icon: MapPin },
+  ];
 
   return (
     <div className="px-4 space-y-6 pb-8">
@@ -53,58 +62,47 @@ const KhetScreen = ({ language }: KhetScreenProps) => {
           <MapPin className="w-6 h-6 text-forest" />
           <h1 className="text-xl font-bold text-soil">{t.title}</h1>
         </div>
-        <motion.button
-          className="voice-btn"
-          whileTap={{ scale: 0.9 }}
-        >
+        <motion.button className="voice-btn" whileTap={{ scale: 0.9 }}>
           <Volume2 className="w-5 h-5" />
         </motion.button>
       </motion.div>
 
-      {/* Toggle Buttons */}
-      <div className="flex gap-3">
-        <motion.button
-          onClick={() => setShowMap(true)}
-          className={`flex-1 py-3 rounded-xl font-medium transition-all ${
-            showMap 
-              ? "bg-forest text-white" 
-              : "bg-muted text-soil"
-          }`}
-          whileTap={{ scale: 0.98 }}
-        >
-          {t.mapFarm}
-        </motion.button>
-        <motion.button
-          onClick={() => setShowMap(false)}
-          className={`flex-1 py-3 rounded-xl font-medium transition-all ${
-            !showMap 
-              ? "bg-forest text-white" 
-              : "bg-muted text-soil"
-          }`}
-          whileTap={{ scale: 0.98 }}
-        >
-          {t.viewSatellite}
-        </motion.button>
+      {/* Tab Buttons */}
+      <div className="flex gap-2">
+        {tabs.map((tab) => (
+          <motion.button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex-1 py-3 rounded-xl font-medium text-sm transition-all flex items-center justify-center gap-1.5 ${
+              activeTab === tab.id ? "bg-forest text-primary-foreground" : "bg-muted text-soil"
+            }`}
+            whileTap={{ scale: 0.98 }}
+          >
+            <tab.icon className="w-4 h-4" />
+            {tab.label}
+          </motion.button>
+        ))}
       </div>
 
       {/* Content */}
       <motion.div
-        key={showMap ? "map" : "satellite"}
-        initial={{ opacity: 0, x: showMap ? -20 : 20 }}
+        key={activeTab}
+        initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.3 }}
       >
-        {showMap ? (
+        {activeTab === "map" && (
           <div className="card-earth">
-            <FarmMap 
-              language={language} 
-              onBoundarySave={handleBoundarySave}
-            />
+            <FarmMap language={language} onBoundarySave={handleBoundarySave} />
           </div>
-        ) : (
+        )}
+        {activeTab === "satellite" && (
           <div className="card-earth">
             <NDVIVisualization language={language} />
           </div>
+        )}
+        {activeTab === "evidence" && (
+          <EvidenceMilestones language={language} />
         )}
       </motion.div>
 
