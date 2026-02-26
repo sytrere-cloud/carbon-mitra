@@ -76,6 +76,63 @@ export type Database = {
           },
         ]
       }
+      consent_agreements: {
+        Row: {
+          aadhaar_last_four: string | null
+          agreement_hash: string | null
+          agreement_type: string
+          agreement_version: string
+          consent_method: string
+          created_at: string
+          device_info: Json | null
+          full_name: string
+          id: string
+          ip_address: string | null
+          otp_verified: boolean | null
+          signature_data: string
+          signature_type: string
+          signed_at: string
+          user_id: string
+          voice_consent_url: string | null
+        }
+        Insert: {
+          aadhaar_last_four?: string | null
+          agreement_hash?: string | null
+          agreement_type?: string
+          agreement_version?: string
+          consent_method?: string
+          created_at?: string
+          device_info?: Json | null
+          full_name: string
+          id?: string
+          ip_address?: string | null
+          otp_verified?: boolean | null
+          signature_data: string
+          signature_type: string
+          signed_at?: string
+          user_id: string
+          voice_consent_url?: string | null
+        }
+        Update: {
+          aadhaar_last_four?: string | null
+          agreement_hash?: string | null
+          agreement_type?: string
+          agreement_version?: string
+          consent_method?: string
+          created_at?: string
+          device_info?: Json | null
+          full_name?: string
+          id?: string
+          ip_address?: string | null
+          otp_verified?: boolean | null
+          signature_data?: string
+          signature_type?: string
+          signed_at?: string
+          user_id?: string
+          voice_consent_url?: string | null
+        }
+        Relationships: []
+      }
       farm_photos: {
         Row: {
           captured_at: string
@@ -217,11 +274,14 @@ export type Database = {
       }
       profiles: {
         Row: {
+          aadhaar_last_four: string | null
           created_at: string
           district: string | null
           full_name: string | null
           id: string
           kisan_id: string | null
+          kyc_completed_at: string | null
+          kyc_status: string | null
           language: string | null
           phone: string | null
           referral_code: string | null
@@ -231,11 +291,14 @@ export type Database = {
           village: string | null
         }
         Insert: {
+          aadhaar_last_four?: string | null
           created_at?: string
           district?: string | null
           full_name?: string | null
           id?: string
           kisan_id?: string | null
+          kyc_completed_at?: string | null
+          kyc_status?: string | null
           language?: string | null
           phone?: string | null
           referral_code?: string | null
@@ -245,11 +308,14 @@ export type Database = {
           village?: string | null
         }
         Update: {
+          aadhaar_last_four?: string | null
           created_at?: string
           district?: string | null
           full_name?: string | null
           id?: string
           kisan_id?: string | null
+          kyc_completed_at?: string | null
+          kyc_status?: string | null
           language?: string | null
           phone?: string | null
           referral_code?: string | null
