@@ -7,8 +7,10 @@ import {
   Handshake, 
   CheckCircle,
   Leaf,
-  Mic
+  Mic,
+  FileSignature
 } from "lucide-react";
+import CarbonRightsAgreement from "@/components/CarbonRightsAgreement";
 
 interface OnboardingScreenProps {
   language: "hi" | "en";
@@ -18,6 +20,7 @@ interface OnboardingScreenProps {
 const OnboardingScreen = ({ language, onComplete }: OnboardingScreenProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [hasAccepted, setHasAccepted] = useState(false);
+  const [showAgreement, setShowAgreement] = useState(false);
 
   const labels = {
     hi: {
@@ -77,16 +80,41 @@ const OnboardingScreen = ({ language, onComplete }: OnboardingScreenProps) => {
   const handleAccept = () => {
     setHasAccepted(true);
     setTimeout(() => {
-      onComplete();
-    }, 1000);
+      setShowAgreement(true);
+    }, 800);
+  };
+
+  const handleAgreementComplete = (data: {
+    fullName: string;
+    aadhaarLastFour: string;
+    signatureData: string;
+    signatureType: "draw" | "type";
+    selfDeclared: boolean;
+  }) => {
+    console.log("Agreement signed:", data);
+    onComplete();
+  };
+
+  const handleAgreementSkip = () => {
+    onComplete();
   };
 
   const currentStepData = steps[currentStep];
   const Icon = currentStepData.icon;
 
+  if (showAgreement) {
+    return (
+      <CarbonRightsAgreement
+        language={language}
+        farmerName={language === "hi" ? "राजेश किसान" : "Rajesh Kisan"}
+        onComplete={handleAgreementComplete}
+        onSkip={handleAgreementSkip}
+      />
+    );
+  }
+
   return (
     <div className="fixed inset-0 bg-background z-50 flex flex-col">
-      {/* Skip Button */}
       <div className="flex justify-end p-4 safe-top">
         <motion.button
           onClick={onComplete}
