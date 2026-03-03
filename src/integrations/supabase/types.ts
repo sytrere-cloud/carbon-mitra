@@ -14,6 +14,89 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_assignments: {
+        Row: {
+          assigned_at: string
+          auditor_id: string
+          created_at: string
+          farm_id: string
+          id: string
+          notes: string | null
+          season: string | null
+          status: string
+          year: number | null
+        }
+        Insert: {
+          assigned_at?: string
+          auditor_id: string
+          created_at?: string
+          farm_id: string
+          id?: string
+          notes?: string | null
+          season?: string | null
+          status?: string
+          year?: number | null
+        }
+        Update: {
+          assigned_at?: string
+          auditor_id?: string
+          created_at?: string
+          farm_id?: string
+          id?: string
+          notes?: string | null
+          season?: string | null
+          status?: string
+          year?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_assignments_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "farms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      audit_reports: {
+        Row: {
+          auditor_id: string
+          created_at: string
+          farm_ids: string[] | null
+          generated_at: string | null
+          id: string
+          report_data: Json | null
+          report_type: string
+          sent_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          auditor_id: string
+          created_at?: string
+          farm_ids?: string[] | null
+          generated_at?: string | null
+          id?: string
+          report_data?: Json | null
+          report_type?: string
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          auditor_id?: string
+          created_at?: string
+          farm_ids?: string[] | null
+          generated_at?: string | null
+          id?: string
+          report_data?: Json | null
+          report_type?: string
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       carbon_credits: {
         Row: {
           buyer_name: string | null
@@ -361,7 +444,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "farmer"
+      app_role: "admin" | "farmer" | "auditor"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -489,7 +572,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "farmer"],
+      app_role: ["admin", "farmer", "auditor"],
     },
   },
 } as const

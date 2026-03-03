@@ -2,3 +2,6 @@ project_id = "syuyptdcpqretxqwkwdg"
 
 [functions.fetch-ndvi]
 verify_jwt = false
+
+[functions.generate-audit-report]
+verify_jwt = false

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User, Session } from "@supabase/supabase-js";
 
-export type AppRole = "admin" | "farmer";
+export type AppRole = "admin" | "farmer" | "auditor";
 
 interface AuthState {
   user: User | null;
@@ -10,6 +10,7 @@ interface AuthState {
   loading: boolean;
   role: AppRole | null;
   isAdmin: boolean;
+  isAuditor: boolean;
 }
 
 export const useAuth = () => {
@@ -19,16 +20,15 @@ export const useAuth = () => {
     loading: true,
     role: null,
     isAdmin: false,
+    isAuditor: false,
   });
 
   useEffect(() => {
-    // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         const user = session?.user ?? null;
         
         if (user) {
-          // Fetch user role
           const { data: roles } = await supabase
             .from("user_roles")
             .select("role")
@@ -43,6 +43,7 @@ export const useAuth = () => {
             loading: false,
             role,
             isAdmin: role === "admin",
+            isAuditor: role === "auditor",
           });
         } else {
           setAuthState({
@@ -51,12 +52,12 @@ export const useAuth = () => {
             loading: false,
             role: null,
             isAdmin: false,
+            isAuditor: false,
           });
         }
       }
     );
 
-    // THEN check for existing session
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       const user = session?.user ?? null;
       
@@ -75,6 +76,7 @@ export const useAuth = () => {
           loading: false,
           role,
           isAdmin: role === "admin",
+          isAuditor: role === "auditor",
         });
       } else {
         setAuthState(prev => ({ ...prev, loading: false }));
