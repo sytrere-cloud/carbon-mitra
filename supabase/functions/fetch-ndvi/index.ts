@@ -92,8 +92,22 @@ Deno.serve(async (req) => {
     const avgNDVI = grid.flat().reduce((s, c) => s + c.value, 0) / 64;
     const healthScore = Math.round(Math.min(100, Math.max(0, avgNDVI * 120)));
 
-    // Store in database if farmId provided
+    // Store in database if farmId provided (after verifying ownership)
     if (farmId) {
+      // Verify the user owns this farm or is an assigned auditor
+      const { data: farm, error: farmError } = await supabase
+        .from("farms")
+        .select("id")
+        .eq("id", farmId)
+        .maybeSingle();
+
+      if (farmError || !farm) {
+        return new Response(JSON.stringify({ error: "Forbidden: you do not own this farm" }), {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
       const serviceClient = createClient(
         Deno.env.get("SUPABASE_URL")!,
         Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
