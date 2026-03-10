@@ -99,11 +99,14 @@ const EvidenceMilestones = ({ language, farmId }: EvidenceMilestonesProps) => {
 
       if (uploadError) throw uploadError;
 
-      const { data: { publicUrl } } = supabase.storage
+      const { data: signedUrlData, error: signedUrlError } = await supabase.storage
         .from("farm-photos")
-        .getPublicUrl(fileName);
+        .createSignedUrl(fileName, 3600);
 
-      // Save to farm_photos table
+      if (signedUrlError) throw signedUrlError;
+      const photoUrl = signedUrlData.signedUrl;
+
+      // Save to farm_photos table (store the file path, not the signed URL)
       if (farmId) {
         await supabase.from("farm_photos").insert({
           farm_id: farmId,
