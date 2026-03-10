@@ -126,7 +126,7 @@ const EvidenceMilestones = ({ language, farmId }: EvidenceMilestonesProps) => {
       // Update stage status
       setStages((prev) =>
         prev.map((s) =>
-          s.id === activeStageId ? { ...s, status: "pending" as const, photoUrl: publicUrl } : s
+          s.id === activeStageId ? { ...s, status: "pending" as const, photoUrl } : s
         )
       );
 
