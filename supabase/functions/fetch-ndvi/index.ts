@@ -50,9 +50,8 @@ Deno.serve(async (req) => {
       { global: { headers: { Authorization: authHeader } } }
     );
 
-    const token = authHeader.replace("Bearer ", "");
-    const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
-    if (claimsError || !claimsData?.claims) {
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    if (userError || !user) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 
@@ -93,8 +92,22 @@ Deno.serve(async (req) => {
     const avgNDVI = grid.flat().reduce((s, c) => s + c.value, 0) / 64;
     const healthScore = Math.round(Math.min(100, Math.max(0, avgNDVI * 120)));
 
-    // Store in database if farmId provided
+    // Store in database if farmId provided (after verifying ownership)
     if (farmId) {
+      // Verify the user owns this farm or is an assigned auditor
+      const { data: farm, error: farmError } = await supabase
+        .from("farms")
+        .select("id")
+        .eq("id", farmId)
+        .maybeSingle();
+
+      if (farmError || !farm) {
+        return new Response(JSON.stringify({ error: "Forbidden: you do not own this farm" }), {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
       const serviceClient = createClient(
         Deno.env.get("SUPABASE_URL")!,
         Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
