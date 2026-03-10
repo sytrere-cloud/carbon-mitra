@@ -111,7 +111,7 @@ const EvidenceMilestones = ({ language, farmId }: EvidenceMilestonesProps) => {
         await supabase.from("farm_photos").insert({
           farm_id: farmId,
           user_id: user.id,
-          photo_url: publicUrl,
+          photo_url: fileName,
           photo_type: "evidence",
           milestone_stage: activeStageId,
           latitude: metadata.latitude,
